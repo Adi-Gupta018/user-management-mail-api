@@ -305,12 +305,12 @@ const fetchUser = asyncHandler( async (req,res) => {
 
     if(!userId){
       const allusers = await User.find({}).populate('customProperties');
-      if(!allusers) res.status(404).json({message:"Users list is empty"});
-      res.status(200).json(allusers);
+      if(!allusers) return res.status(404).json({message:"Users list is empty"});
+      return res.status(200).json(allusers);
     }
 
     const fetchedUser = await User.findById(userId).populate('customProperties');
-    if(!fetchedUser) res.status(404).json({message:"User not found"});
+    if(!fetchedUser) return res.status(404).json({message:"User not found"});
 
     res.status(200).json(fetchedUser);
   } catch (error) {

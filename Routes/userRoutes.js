@@ -4,12 +4,14 @@ const {fetchList} = require('../Controllers/listController');
 const {uploadCSV} = require('../Controllers/userController');
 const {fetchUser} = require('../Controllers/userController');
 const {fetchListUsers} = require('../Controllers/userController');
+const sendEmailToList = require('../Controllers/mailContoller');
 
 userRouter = express.Router();
 
 //post methods
 userRouter.post('/list',listInsertion);  
 userRouter.post('/upload/:list_id',uploadCSV);
+userRouter.post('/mail/:list_id',sendEmailToList);
 
 //get methods
 userRouter.get('/list',fetchList);
