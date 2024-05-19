@@ -1,15 +1,24 @@
 const express = require('express');
 const {listInsertion} = require('../Controllers/listController');
 const {fetchList} = require('../Controllers/listController');
-const uploadCSV = require('../Controllers/userController');
+const {uploadCSV} = require('../Controllers/userController');
+const {fetchUser} = require('../Controllers/userController');
+const {fetchListUsers} = require('../Controllers/userController');
 
 userRouter = express.Router();
 
-// userRouter.post('/list',listInsertion);  
+//post methods
 userRouter.post('/list',listInsertion);  
+userRouter.post('/upload/:list_id',uploadCSV);
+
+//get methods
 userRouter.get('/list',fetchList);
 userRouter.get('/list/:list_id',fetchList);
-userRouter.post('/upload/:list_id',uploadCSV);
+
+userRouter.get('/userlist/:list_id',fetchListUsers);    
+userRouter.get('/user',fetchUser);
+userRouter.get('/user/:user_id',fetchUser);
+
 userRouter.get('/test',()=>{console.log("receives");})
 
 

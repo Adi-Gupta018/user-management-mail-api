@@ -39,7 +39,7 @@ const fetchList = asyncHandler(async(req,res) => {
         const listId = req?.params?.list_id;
         if(!listId){
             const allLists = await List.find({}).populate('customProperties');
-            if(!allLists) res.status(500).json({message:"There are no lists"});
+            if(!allLists) res.status(404).json({message:"There are no lists"});
             res.status(200).json(allLists);
         }
 
@@ -49,7 +49,8 @@ const fetchList = asyncHandler(async(req,res) => {
 
         res.status(200).json(fetchedList);
     } catch (error) {
-        
+        console.error(error);
+        res.status(500).json({message:error});
     }
 })
 
